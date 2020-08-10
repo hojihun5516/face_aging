@@ -40,7 +40,7 @@ router.post('/api_v1/cgan', upload.single('img'), (req, res) => {
 ///테스트용 사진업로드
 router.post('/api_v1/test/cgan', upload.single('img'), (req, res) => {
     try {
-        console.log("req.file: ", req.file); // 테스트 => req.file.location에 이미지 링크(s3-server)가 담겨있음 
+        console.log("req.file: ", req.file); // 테스트 => req.file.location에 이미지 링크(s3-server)가 담겨있음
         const payLoad = { url: req.file.location };
         res.status(200).json(payLoad);
     } catch (err) {
