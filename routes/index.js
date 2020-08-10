@@ -6,14 +6,17 @@ const express = require('express')
 const router = express.Router()
 const AWS = require('aws-sdk');
 const s3 = new AWS.S3();
+
+
+
+
 const upload = multer({
     storage: multerS3({
-        s3: s3,
-        bucket: "bigdata-cgan", // 버킷 이름
-        contentType: multerS3.AUTO_CONTENT_TYPE, // 자동을 콘텐츠 타입 세팅
-        acl: 'public-read', // 클라이언트에서 자유롭게 가용하기 위함
-        key: (req, file, cb) => {
-            console.log(file);
+        s3,
+        bucket: "bigdata-cgan",
+        contentType: multerS3.AUTO_CONTENT_TYPE,
+        acl: 'public-read', 
+        key: function(req, file, cb) {
             cb(null, new Date().valueOf() + file.originalname)
         },
     }),

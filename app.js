@@ -1,17 +1,18 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const cors = require('cors');
 const AWS = require('aws-sdk');
 const router = require('./routes');
+const cors = require('cors')
 
 AWS.config.update({
     accessKeyId: process.env.AWS_ACCESSKEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
     region : 'ap-northeast-2'
 })
-app.use('/',router)
+
 app.use(cors('*'))
+app.use('/',router)
 
 app.use((req, res, next) => {
     const err = new Error('Not Found Request URL');
